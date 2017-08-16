@@ -1,19 +1,22 @@
 FROM ubuntu:16.04
-MAINTAINER Enrico Gaffo <enrico.gaffo@gmail.com>
+
+LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 
 ############################################################
 # Software: 		CirComPara
-# Software Version: 	0.1.4
+# Software Version: 	0.1.3
 # Software Website: 	https://github.com/egaffo/CirComPara
 # Description: 		CirComPara
 ############################################################
 
+ARG INSTALL_THREADS=2
+
 ENV APP_NAME=CirComPara
-ENV VERSION=v0.1.4
+ENV VERSION=v0.1.3
 ENV GIT=https://github.com/egaffo/CirComPara.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$DEST/$VERSION/scripts/:$PATH
-ENV INSTALL_THREADS=2
+
 
 RUN apt-get update && apt-get install -y \
 	python2.7 \
@@ -46,15 +49,6 @@ RUN git clone $GIT ; \
     rm -rf tools/*.bz2 ; \
     cd ../ ;
 
-## test the installation
-#RUN cd $APP_NAME ; \
-#    tar xf test_circompara.tar.gz ; \
-#    cd test_circompara ; \
-#    sed "s@\$CIRCOMPARA@/CirComPara@g" vars.py > analysis/vars.py ; \
-#    sed "s@\$CIRCOMPARA@/CirComPara@g" meta.csv > analysis/meta.csv ; \
-#    cd analysis/ ; \
-#    ../../circompara -j $INSTALL_THREADS
+WORKDIR /data
 
-
-CMD ["/bin/bash"]
-ENTRYPOINT ["/bin/bash", "/$APP_NAME/circompara"]
+ENTRYPOINT ["/CirComPara/circompara"]
