@@ -35,19 +35,17 @@ RUN apt-get update && apt-get install -y \
 	pandoc \
 	git \
 	wget \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN pip install --upgrade pip
-
-RUN git clone $GIT ; \
-    cd $APP_NAME ; \
-    git checkout tags/$VERSION ; \
-    ./install_circompara -j $INSTALL_THREADS ;\
-    rm -rf .git ; \
-    rm -rf tools/*.gz ; \
-    rm -rf tools/*.zip ; \
-    rm -rf tools/*.bz2 ; \
-    cd ../ ;
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --upgrade pip \
+    && git clone $GIT  \
+    && cd $APP_NAME \
+    && git checkout tags/$VERSION \
+    && ./install_circompara -j${INSTALL_THREADS} \
+    && rm -rf .git \
+    && rm -rf tools/*.gz \
+    && rm -rf tools/*.zip \
+    && rm -rf tools/*.bz2 \
+    && cd ../ 
 
 WORKDIR /data
 
