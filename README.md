@@ -6,15 +6,47 @@
 
 Docker pull command:
 
-	```bash
-	docker pull egaffo/circompara-docker
-	```
+```bash
+docker pull egaffo/circompara-docker
+```
 
 Run command example:
 	
-	```bash
-	docker run --rm -it -v $(pwd):/data egaffo/circompara-docker
-	```
+```bash
+docker run --rm -it -v $(pwd):/data egaffo/circompara-docker
+```
+
+Mind that all files must be in the current directory and that paths in `meta.csv` and `vars.py` must be relative to the container `/data` directory. For instance, using the test data, you have to copy the `annotation` and `reads` directories into the `analysis` directory. Then, `meta.csv` will be as follows:  
+
+    file,sample,condition,adapter  
+    /data/reads/readsA_1.fastq.gz,sample_A,A,/CirComPara/tools/Trimmomatic-0.36/adapters/TruSeq3-PE-2.fa  
+    /data/reads/readsA_2.fastq.gz,sample_A,A,/CirComPara/tools/Trimmomatic-0.36/adapters/TruSeq3-PE-2.fa  
+    /data/reads/readsB_1.fastq.gz,sample_B,B,/CirComPara/tools/Trimmomatic-0.36/adapters/TruSeq3-PE-2.fa  
+    /data/reads/readsB_2.fastq.gz,sample_B,B,/CirComPara/tools/Trimmomatic-0.36/adapters/TruSeq3-PE-2.fa  
+
+and `vars.py`:  
+
+```python
+META            = "meta.csv"
+GENOME_FASTA    = '/data/annotation/CFLAR_HIPK3.fa'
+ANNOTATION      = '/data/annotation/CFLAR_HIPK3.gtf' 
+CIRI            = "/CirComPara/bin/CIRI_v2.0.2.pl" 
+CPUS            = "3"
+PREPROCESSOR    = "trimmomatic"
+CIRCRNA_METHODS = "ciri,circexplorer,findcirc,testrealign"
+TOGGLE_TRANSCRIPTOME_RECONSTRUCTION = 'False'
+DIFF_EXP = 'False'
+DESEQ = 'False'
+PREPROCESSOR_PARAMS = "MAXINFO:40:0.5 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:30 MINLEN:35 AVGQUAL:30"
+CUFFNORM_EXTRA_PARAMS = "--output-format cuffdiff"
+BWA_PARAMS = "-T 19"
+```
+
+The results will be owned by `root`. If you want the container to give your user permissions try to use the "-u `id -u`" workaround:
+
+```bash
+docker run -u `id -u` --rm -it -v $(pwd):/data egaffo/circompara-docker
+```
 
 # How to cite
 
