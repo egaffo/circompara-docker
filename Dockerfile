@@ -4,7 +4,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 
 ############################################################
 # Software: 		CirComPara
-# Software Version: 	0.2.0
+# Software Version: 	0.2.1
 # Software Website: 	https://github.com/egaffo/CirComPara
 # Description: 		CirComPara
 ############################################################
@@ -12,7 +12,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 ARG INSTALL_THREADS=2
 
 ENV APP_NAME=CirComPara
-ENV VERSION=v0.2.0
+ENV VERSION=v0.2.1
 ENV GIT=https://github.com/egaffo/CirComPara.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$DEST/$VERSION/scripts/:$PATH
@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y \
 	pandoc \
 	git \
 	wget \
+	libnlopt-dev \
     && pip install --upgrade pip \
     && git clone $GIT  \
     && cd $APP_NAME \
