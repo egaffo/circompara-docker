@@ -4,7 +4,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 
 ############################################################
 # Software: 		CirComPara
-# Software Version: 	0.2.1
+# Software Version: 	0.2.2
 # Software Website: 	https://github.com/egaffo/CirComPara
 # Description: 		CirComPara
 ############################################################
@@ -12,7 +12,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 ARG INSTALL_THREADS=2
 
 ENV APP_NAME=CirComPara
-ENV VERSION=v0.2.1
+ENV VERSION=v0.2.2
 ENV GIT=https://github.com/egaffo/CirComPara.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$DEST/$VERSION/scripts/:$PATH
