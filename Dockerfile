@@ -4,7 +4,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 
 ############################################################
 # Software: 		CirComPara
-# Software Version: 	0.2.2
+# Software Version: 	0.6.1a
 # Software Website: 	https://github.com/egaffo/CirComPara
 # Description: 		CirComPara
 ############################################################
@@ -12,13 +12,15 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 ARG INSTALL_THREADS=2
 
 ENV APP_NAME=CirComPara
-ENV VERSION=v0.2.2
+ENV VERSION=v0.6.1a
 ENV GIT=https://github.com/egaffo/CirComPara.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$DEST/$VERSION/scripts/:$PATH
+ENV PACKS /packs
 
-
-RUN apt-get update && apt-get install -y \
+RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable && \
+    apt-get update && \
+    apt-get install -y \
 	python2.7 \
 	python-pip \
 	python-numpy \
@@ -33,9 +35,12 @@ RUN apt-get update && apt-get install -y \
 	libssl-dev \
 	libcairo2-dev \
 	pandoc \
+	cargo \
+	libgdal-dev \
 	git \
 	wget \
 	libnlopt-dev \
+	curl \
     && pip install --upgrade pip \
     && git clone $GIT  \
     && cd $APP_NAME \

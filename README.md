@@ -30,16 +30,6 @@ and `vars.py`:
 META            = "meta.csv"
 GENOME_FASTA    = '/data/annotation/CFLAR_HIPK3.fa'
 ANNOTATION      = '/data/annotation/CFLAR_HIPK3.gtf' 
-CIRI            = "/CirComPara/bin/CIRI_v2.0.2.pl" 
-CPUS            = "3"
-PREPROCESSOR    = "trimmomatic"
-CIRCRNA_METHODS = "ciri,circexplorer,findcirc,testrealign"
-TOGGLE_TRANSCRIPTOME_RECONSTRUCTION = 'False'
-DIFF_EXP = 'False'
-DESEQ = 'False'
-PREPROCESSOR_PARAMS = "MAXINFO:40:0.5 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:30 MINLEN:35 AVGQUAL:30"
-CUFFNORM_EXTRA_PARAMS = "--output-format cuffdiff"
-BWA_PARAMS = "-T 19"
 ```
 
 The results will be owned by `root`. If you want the container to give your user permissions try to use the "-u `id -u`" workaround:
