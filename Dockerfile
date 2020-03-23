@@ -4,7 +4,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 
 ############################################################
 # Software: 		CirComPara
-# Software Version: 	1.0
+# Software Version: 	1.1
 # Software Website: 	https://github.com/egaffo/CirComPara
 # Description: 		CirComPara
 ############################################################
@@ -12,7 +12,7 @@ LABEL maintainer="Enrico Gaffo <enrico.gaffo@gmail.com>"
 ARG INSTALL_THREADS=2
 
 ENV APP_NAME=CirComPara
-ENV VERSION=v1.0
+ENV VERSION=v1.1
 ENV GIT=https://github.com/egaffo/CirComPara.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$DEST/$VERSION/scripts/:$PATH
@@ -50,6 +50,7 @@ RUN echo "deb http://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/" >> /et
 	freeglut3-dev \
 	bwidget \
 	libmagick++-dev \
+	pigz \
     && pip install --upgrade pip \
     && git clone $GIT  \
     && cd $APP_NAME \
