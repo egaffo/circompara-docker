@@ -51,6 +51,7 @@ RUN echo "deb http://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/" >> /et
 	bwidget \
 	libmagick++-dev \
 	pigz \
+	cython \
     && pip install --upgrade pip \
     && git clone $GIT  \
     && cd $APP_NAME \
